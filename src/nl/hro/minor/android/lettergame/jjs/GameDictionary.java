@@ -1,5 +1,11 @@
 package nl.hro.minor.android.lettergame.jjs;
 
+import java.io.IOException;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 public class GameDictionary {
 
 	public GameDictionary() {
@@ -11,18 +17,33 @@ public class GameDictionary {
 		// Get main context
 		ContextHolder ch = ContextHolder.getInstance();
 		
-		// Get the arraylist/dictionary
-		String[] dictionary = ch.getContext().getResources().getStringArray(R.array.dict_nl_array);
-		
-		for (String s : dictionary) {
+
+		DbUtils db = null;
+		SQLiteDatabase dbDictionary = null;
+		try {
+			db = new DbUtils(ch.getContext());
+			db.createdatabase();
+			db.opendatabase();
 			
-		    // Check if dictionary item matches the given word
-			if (s.equals(word)) {
-		       return true;
-		    }
-			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
+		
+		//*
+		Cursor result = db.myDataBase.rawQuery("SELECT word FROM dictionary WHERE word='" + word + "'", null);
+		//Cursor rs = 
+		
+		
+		while(!result.isLast()){
+			result.moveToNext();
+			String dbWord = result.getString(1);
+			if( dbWord == word ){
+				Log.w("DB", "Match!");
+			}
+		}
+		//*/
 		return false;
 
 	}
