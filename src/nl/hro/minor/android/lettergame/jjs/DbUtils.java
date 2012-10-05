@@ -16,12 +16,8 @@ public class DbUtils extends SQLiteOpenHelper{
 	private Context mycontext;
 
 	private String DB_PATH = "/data/data/nl.hro.minor.android.lettergame.jjs/databases/";
-	//private String DB_PATH = mycontext.getApplicationContext().getPackageName()+"/databases/";
-	private static String DB_NAME = "gamedirectory.db";//the extension may be .sqlite or .db
+	private static String DB_NAME = "gamedictionary.db";//the extension may be .sqlite or .db
 	public SQLiteDatabase myDataBase;
-	/*private String DB_PATH = "/data/data/"
-	                            + mycontext.getApplicationContext().getPackageName()
-	                            + "/databases/";*/
 
 	public DbUtils(Context context) throws IOException  {
 	    super(context,DB_NAME,null,1);
@@ -29,7 +25,7 @@ public class DbUtils extends SQLiteOpenHelper{
 	    boolean dbexist = checkdatabase();
 	    if(dbexist)
 	    {
-	        //System.out.println("Database exists");
+	        System.out.println("Database exists");
 	        opendatabase(); 
 	    }
 	    else
@@ -44,13 +40,13 @@ public class DbUtils extends SQLiteOpenHelper{
 	    boolean dbexist = checkdatabase();
 	    if(dbexist)
 	    {
-	        //System.out.println(" Database exists.");
+	        System.out.println("Database exists.");
 	    }
 	    else{
-	    	System.out.println(" Database creation FAILED.");
+	    	System.out.println("Reading database.");
 	        this.getReadableDatabase();
 	    try{
-	    	System.out.println(" Try database copy");
+	    	System.out.println("Try database copy");
 	    		copydatabase();
 	        }
 	        catch(IOException e){
@@ -59,12 +55,10 @@ public class DbUtils extends SQLiteOpenHelper{
 	    }
 	}
 	private boolean checkdatabase() {
-	    //SQLiteDatabase checkdb = null;
 	    boolean checkdb = false;
 	    try{
 	        String myPath = DB_PATH + DB_NAME;
 	        File dbfile = new File(myPath);
-	        //checkdb = SQLiteDatabase.openDatabase(myPath,null,SQLiteDatabase.OPEN_READWRITE);
 	        checkdb = dbfile.exists();
 	    }
 	    catch(SQLiteException e){
@@ -82,7 +76,7 @@ public class DbUtils extends SQLiteOpenHelper{
 	    String outfilename = DB_PATH + DB_NAME;
 
 	    //Open the empty db as the output stream
-	    OutputStream myoutput = new FileOutputStream("/data/data/gr.peos/databases/BLib.sqlite");
+	    OutputStream myoutput = new FileOutputStream(outfilename);
 
 	    // transfer byte to inputfile to outputfile
 	    byte[] buffer = new byte[1024];

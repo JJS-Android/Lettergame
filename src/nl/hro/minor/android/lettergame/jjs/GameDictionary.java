@@ -30,20 +30,19 @@ public class GameDictionary {
 			e.printStackTrace();
 		}
 		
-		
-		//*
-		Cursor result = db.myDataBase.rawQuery("SELECT word FROM dictionary WHERE word='" + word + "'", null);
-		//Cursor rs = 
-		
-		
-		while(!result.isLast()){
-			result.moveToNext();
-			String dbWord = result.getString(1);
-			if( dbWord == word ){
-				Log.w("DB", "Match!");
-			}
+		Cursor result = db.myDataBase.rawQuery("SELECT * FROM dictionary WHERE word='" + word + "'", null);
+
+		if (result.moveToFirst())
+		{
+			do {
+				String dbWord = result.getString(0);
+				if( dbWord.equals(word) ){
+					Log.w("DB", "Match!");
+					return true;
+				}
+			} while (result.moveToNext());
 		}
-		//*/
+		
 		return false;
 
 	}
