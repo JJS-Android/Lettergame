@@ -1,15 +1,13 @@
 package nl.hro.minor.android.lettergame.jjs;
 
-import java.util.Dictionary;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 
-public class Main extends Activity implements android.view.View.OnClickListener{
+public class Main extends Activity implements OnClickListener{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,10 +20,11 @@ public class Main extends Activity implements android.view.View.OnClickListener{
         
         // Get the startbutton and attack click listener
         View aboutButton = findViewById(R.id.btn_start);
+        aboutButton.setOnClickListener(this);
         
         //*
         Log.w("Test", ""+GameDictionary.checkWord("test"));
-        /* Log.w("Test", ""+GameDictionary.checkWord("banaan"));
+        Log.w("Test", ""+GameDictionary.checkWord("banaan"));
         Log.w("Test", ""+GameDictionary.checkWord("computer"));
         Log.w("Test", ""+GameDictionary.checkWord("blauw"));
         Log.w("Test", ""+GameDictionary.checkWord("telefoon"));
