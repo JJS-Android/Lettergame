@@ -13,10 +13,11 @@ public class Game extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        loadStatics();
         setContentView(new CanvasView(this));
         ch = ContextHolder.getInstance();
         ch.setContext(this);
-        loadStatics();
+        
         
     }
 	
@@ -26,6 +27,7 @@ public class Game extends Activity {
 		BitmapFactory.Options opts = new BitmapFactory.Options();
 		opts.inScaled = false;  
 		Dice._bmp = BitmapFactory.decodeResource(res, R.drawable.dice, opts);
+		GameBoard._bmp = BitmapFactory.decodeResource(res, R.drawable.board, opts);
 	}
 
 }

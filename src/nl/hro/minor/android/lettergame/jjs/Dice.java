@@ -1,5 +1,7 @@
 package nl.hro.minor.android.lettergame.jjs;
 
+import java.util.Random;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -13,8 +15,6 @@ public class Dice {
 	private Rect _diceRect;
 	private int _frames;
 	private int _currentFrame;
-	private int _spriteHeight;
-	private int _spriteWidth;
 	
 	private int _speedX;
 	private int _speedY;
@@ -27,12 +27,13 @@ public class Dice {
 	public Dice(int posX, int posY, int speedX, int speedY)
 	{
 		_ch = ContextHolder.getInstance();
-		
-	    _diceRect = new Rect(0,0,55,55);
-	    _currentFrame =1;
-	    _frames = 11;
-		
 	    _size = 55;
+	    _diceRect = new Rect(0,0,_size,_size);
+	    _frames = 26;
+	    Random r = new Random();
+	    _currentFrame = r.nextInt(_frames);
+	    
+
 		_posX =posX;
 		_posY =posY;
 		_speedX = speedX;
@@ -73,19 +74,24 @@ public class Dice {
 	public void move()
 	{
 		
-		Display display = _ch.getContext().getWindowManager().getDefaultDisplay();	
+		
 		
 		if(_moving == true)
 		{
+		
+		//move this somewhere else
+		Display display = _ch.getContext().getWindowManager().getDefaultDisplay();	
 		int width = display.getWidth();
 		int height = display.getHeight();
+		
+		
 		int nextPosX = _posX +=_speedX;
 		int nextPosY = _posY +=_speedY;
 		if(nextPosX > width-_size || nextPosX<0)
 		{
 			_speedX*=-1;
 		}
-		if(nextPosY > height-_size || nextPosY<0)
+		if(nextPosY > height-_size-130 || nextPosY<0)
 		{
 			_speedY*=-1;
 		}
