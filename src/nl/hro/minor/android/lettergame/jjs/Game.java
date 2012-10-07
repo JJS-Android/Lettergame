@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-
 public class Game extends Activity {
 
 	private ContextHolder ch;
