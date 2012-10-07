@@ -25,6 +25,8 @@ public class CanvasView extends View {
 	private Region _checkBounds;
 	private int _currentDiceDragging = -1; // -1 = none (yet) or stopped dragging
 	
+	private int[] _lastPosition = new int[2];
+	
 	public CanvasView(Context context) {
 		super(context);
 		mContext = context;
@@ -82,6 +84,8 @@ public class CanvasView extends View {
 					
 					if(_checkBounds.contains( (int) event.getRawX(), (int) event.getRawY())){
 						_currentDiceDragging = i;
+						_lastPosition[0] = (int) event.getRawX();
+						_lastPosition[1] = (int) event.getRawY();
 					}                                                        
 			    }
 			return true;
@@ -110,19 +114,24 @@ public class CanvasView extends View {
 						square = (square < 0) ? 0 : square;
 						square = (square > 7) ? 7 : square;
 						_dices[_currentDiceDragging].setExactPosition(10+(square*55), (_destHeight+15));
-						// let the square remember his position
-						_dices[_currentDiceDragging].setSquare(square);
-						// set (new) square position in checkWord() array
-						_squares[square] = _currentDiceDragging;
+						if (_squares[square] == -1) {
+							// let the square remember his position
+							_dices[_currentDiceDragging].setSquare(square);
+							// set (new) square position in checkWord() array
+							_squares[square] = _currentDiceDragging;
+						} else {
+							// a dice is already at this square position
+							_dices[_currentDiceDragging].setPosition(_lastPosition[0], _lastPosition[1]);
+						}
+						checkWord();
 					} else {
 						// remove previous square position
 						if (currentSquare != -1) {
 							_dices[_currentDiceDragging].setSquare(-1);
+							checkWord();
 						}
 					}
 					_currentDiceDragging = -1; // Set to -1 (none) again
-					// check the word
-					checkWord();
 				}
 			return true;
 		}
