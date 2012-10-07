@@ -17,7 +17,6 @@ public class Game extends Activity {
         ch = ContextHolder.getInstance();
         ch.setContext(this);
         
-        
     }
 	
 	public void loadStatics()

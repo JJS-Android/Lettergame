@@ -16,7 +16,6 @@ public class GameDictionary {
 		
 		// Get main context
 		ContextHolder ch = ContextHolder.getInstance();
-		
 
 		DbUtils db = null;
 		SQLiteDatabase dbDictionary = null;
@@ -45,6 +44,15 @@ public class GameDictionary {
 		
 		return false;
 
+	}
+	
+	public String randomWord(){
+		
+		// Return random word from database
+		// Could be used as 'preset' - the letters of this word can be mixed and used on the dices
+		
+		return "";
+		
 	}
 
 	

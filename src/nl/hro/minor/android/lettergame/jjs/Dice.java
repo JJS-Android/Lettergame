@@ -10,10 +10,7 @@ import android.graphics.Region;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-
 
 public class Dice extends View{
 	
@@ -146,23 +143,21 @@ public class Dice extends View{
 		int nextPosX = posX - (_size/ 2 );
 		int nextPosY = posY - (_size / 2 );
 		
+		/*
 		Log.w("pos", "----");
 		Log.w("pos", _size+ ", " + _size);
 		Log.w("pos", nextPosX + ", " + nextPosY);
 		Log.w("pos", _displayWidth + ", " + _displayHeight);
+		*/
 		
 		// Check if the position is within canvasview bounds
 		if(nextPosX > _displayWidth){
 			nextPosX = _displayWidth - this.getWidth();
 		}
 		
-		Log.w("pos", nextPosX + ", " + nextPosY);
-		
 		if(nextPosY > _displayHeight){
 			nextPosY = _displayHeight - this.getHeight();
 		}
-		
-		Log.w("pos", nextPosX + ", " + nextPosY);
 		
 		// Set new X and Y
 		_posX = nextPosX;

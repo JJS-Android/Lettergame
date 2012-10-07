@@ -96,7 +96,7 @@ public class CanvasView extends View{
 			case MotionEvent.ACTION_UP :
 				
 				if(_currentDiceDragging != -1){
-					Log.w("Letter dragged", _dices[_currentDiceDragging].getLetter());
+					//Log.w("Letter dragged", _dices[_currentDiceDragging].getLetter());
 					_currentDiceDragging = -1; // Set to -1 (none) again
 				}
 				
