@@ -21,8 +21,8 @@ public class GameDictionary {
 		SQLiteDatabase dbDictionary = null;
 		try {
 			db = new DbUtils(ch.getContext());
-			db.createdatabase();
-			db.opendatabase();
+			//db.createdatabase();
+			//db.opendatabase();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -37,11 +37,12 @@ public class GameDictionary {
 				String dbWord = result.getString(0);
 				if( dbWord.equals(word) ){
 					Log.w("DB", "Match!");
+					db.myDataBase.close();
 					return true;
 				}
 			} while (result.moveToNext());
 		}
-		
+		db.myDataBase.close();
 		return false;
 
 	}

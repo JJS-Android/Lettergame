@@ -5,6 +5,7 @@ import java.util.Random;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.CountDownTimer;
@@ -31,6 +32,9 @@ public class Dice extends View{
 	private Display _display;
 	private int _displayWidth;
 	private int _displayHeight;
+	private int _square;
+
+	char[] _alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	
 	public Dice(Context context, int posX, int posY, int speedX, int speedY)
 	{
@@ -42,13 +46,12 @@ public class Dice extends View{
 	    _frames = 26;
 	    Random r = new Random();
 	    _currentFrame = r.nextInt(_frames);
+	    _square = -1;
 	    
-
 		_posX =posX;
 		_posY =posY;
 		_speedX = speedX;
 		_speedY = speedY;
-		startAnimation();
 		
 		// Set parent width/height (canvasview)
 		_display = _ch.getContext().getWindowManager().getDefaultDisplay();	
@@ -103,7 +106,7 @@ public class Dice extends View{
 				_speedX *= -1;
 			}
 			
-			if(nextPosY > _displayHeight - _size - 130 || nextPosY < 0) // Jordi: Wat is die 130 hardcoded?
+			if(nextPosY > _displayHeight - _size - 150 || nextPosY < 0) // Jordi: Wat is die 130 hardcoded?
 			{
 				_speedY *= -1;
 			}
@@ -116,8 +119,6 @@ public class Dice extends View{
 	}
 	
 	public void draw(Canvas canvas){
-		move();
-		updateFrame();
 		Rect location = new Rect(_posX, _posY, _posX+_size, _posY+_size);
 		canvas.drawBitmap(_bmp, _diceRect, location, null);
 		
@@ -126,9 +127,15 @@ public class Dice extends View{
 	
 	public String getLetter(){
 		
-		char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-		
-		return Character.toString( alphabet[_currentFrame - 1] );
+		return Character.toString( _alphabet[_currentFrame - 1] );
+	}
+	
+	public void setSquare(int square) {
+		_square = square;
+	}
+	
+	public int getSquare() {
+		return _square;
 	}
 	
 	public Region getBounds(){		
@@ -164,5 +171,10 @@ public class Dice extends View{
 		_posY = nextPosY;
 		
 		invalidate();
+	}
+	
+	public void setExactPosition(int posX, int posY) {
+		_posX = posX;
+		_posY = posY;
 	}
 }
