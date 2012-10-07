@@ -119,11 +119,11 @@ public class CanvasView extends View {
 							_dices[_currentDiceDragging].setSquare(square);
 							// set (new) square position in checkWord() array
 							_squares[square] = _currentDiceDragging;
+							checkWord();
 						} else {
 							// a dice is already at this square position
 							_dices[_currentDiceDragging].setPosition(_lastPosition[0], _lastPosition[1]);
 						}
-						checkWord();
 					} else {
 						// remove previous square position
 						if (currentSquare != -1) {
