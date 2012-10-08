@@ -1,9 +1,13 @@
 package nl.hro.minor.android.lettergame.jjs;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Region;
 import android.util.Log;
 import android.view.Display;
@@ -18,6 +22,8 @@ public class CanvasView extends View {
 	private int _width;
 	private int _height;
 	private ContextHolder _ch;
+	private int _score;
+	private ArrayList<String> _guessedWords = new ArrayList<String>();
 	
 	private int _destHeight;
 	private int[] _squares = { -1,-1,-1,-1,-1,-1,-1,-1 };
@@ -37,6 +43,7 @@ public class CanvasView extends View {
 		_height = display.getHeight();
 		//make gameboard
 		_gameBoard = new GameBoard(_width, _height);
+		_score = 0;
 		//throw dices
 		makeDiceArray();
 		//set height where dice snap to the destination squares
@@ -62,6 +69,15 @@ public class CanvasView extends View {
 	
 	@Override
 	protected void onDraw(Canvas canvas){
+		
+		Paint paint = new Paint(); 
+
+		paint.setColor(Color.rgb(238, 87, 21)); 
+		paint.setTextSize(30);
+		canvas.drawText("Score: "+_score, 15, 30, paint); 
+
+		
+		
 		_gameBoard.draw(canvas);
 		for (int i = 0; i < _dices.length; i++) { 
 			
@@ -151,7 +167,27 @@ public class CanvasView extends View {
 		}
 		if (countLetters > 2) {
 			if (GameDictionary.checkWord(word)) {
-				ToastSingleton.makeToast(_ch.getContext(), "Goed! "+word);
+				boolean guessed = false;
+				for(String w : _guessedWords) {
+					Log.d("ad",""+word);
+					Log.d("ad",""+w);
+					if(w.contains(word))
+						{
+							Log.d("","same");
+							guessed = true;
+						}
+					
+					}				
+				if(guessed)
+				{
+					ToastSingleton.makeToast(_ch.getContext(), "Word al geraden");
+				}
+				else
+				{
+					ToastSingleton.makeToast(_ch.getContext(), "Goed! "+word);
+					_score += word.length()*10;
+					_guessedWords.add(word);
+				}
 			} else {
 				ToastSingleton.makeToast(_ch.getContext(), "Niet goed! "+word);
 			}
