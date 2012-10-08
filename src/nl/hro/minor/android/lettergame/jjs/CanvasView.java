@@ -54,7 +54,7 @@ public class CanvasView extends View {
 		
 		for (int i = 0; i < _dices.length; i++) { 
 			Random r = new Random();
-			_dices[i] = new Dice(mContext, r.nextInt((_width-60)), 0, r.nextInt(3)+1, r.nextInt(5)+1);
+			_dices[i] = new Dice(mContext, r.nextInt((_width-60)), 0, r.nextInt(10)-r.nextInt(10), r.nextInt(12)-r.nextInt(12));
 			_dices[i].startAnimation();
 	       
 	    }

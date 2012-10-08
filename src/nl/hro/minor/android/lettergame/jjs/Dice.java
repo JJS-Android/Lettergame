@@ -71,6 +71,7 @@ public class Dice extends View{
 	     }
 
 	     public void onFinish() {
+	    	 _currentFrame = AlphabetSingleton.randomLetter();
 	    	 _moving = false;
 	     }
 	     
@@ -95,8 +96,6 @@ public class Dice extends View{
 		
 		if(_moving == true)
 		{
-		
-			//move this somewhere else
 			
 			int nextPosX = _posX +=_speedX;
 			int nextPosY = _posY +=_speedY;
