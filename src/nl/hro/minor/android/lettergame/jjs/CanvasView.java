@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Region;
 import android.util.Log;
@@ -32,6 +33,9 @@ public class CanvasView extends View {
 	private int _currentDiceDragging = -1; // -1 = none (yet) or stopped dragging
 	
 	private int[] _lastPosition = new int[2];
+	private Paint _paintRed;
+	private Paint _paintWhite;
+	private String _message = "";
 	
 	public CanvasView(Context context) {
 		super(context);
@@ -48,6 +52,16 @@ public class CanvasView extends View {
 		makeDiceArray();
 		//set height where dice snap to the destination squares
 		_destHeight = _gameBoard.getHeight() - 150;
+		
+		// set score paint
+		_paintRed = new Paint();
+		_paintRed.setColor(Color.rgb(238, 87, 21)); 
+		_paintRed.setTextSize(30);
+		// set message paint
+		_paintWhite = new Paint();
+		_paintWhite.setColor(Color.WHITE);
+		_paintWhite.setTextSize(30);
+		_paintWhite.setTextAlign(Align.CENTER);
 		
 		setFocusable(true);
 		setFocusableInTouchMode(true);
@@ -69,16 +83,12 @@ public class CanvasView extends View {
 	
 	@Override
 	protected void onDraw(Canvas canvas){
-		
-		Paint paint = new Paint(); 
-
-		paint.setColor(Color.rgb(238, 87, 21)); 
-		paint.setTextSize(30);
-		canvas.drawText("Score: "+_score, 15, 30, paint); 
-
-		
-		
+		// draw score text
+		canvas.drawText("Score: "+_score, 15, 30, _paintRed);
+		// draw gameboard (destination squares)
 		_gameBoard.draw(canvas);
+		// draw message
+		canvas.drawText(_message, _width/2, _height-30, _paintWhite);
 		for (int i = 0; i < _dices.length; i++) { 
 			
 			_dices[i].move();
@@ -167,29 +177,19 @@ public class CanvasView extends View {
 		}
 		if (countLetters > 2) {
 			if (GameDictionary.checkWord(word)) {
-				boolean guessed = false;
-				for(String w : _guessedWords) {
-					Log.d("ad",""+word);
-					Log.d("ad",""+w);
-					if(w.contains(word))
-						{
-							Log.d("","same");
-							guessed = true;
-						}
-					
-					}				
-				if(guessed)
+				if(_guessedWords.contains(word))
 				{
-					ToastSingleton.makeToast(_ch.getContext(), "Word al geraden");
+					_message = "Woord is al geraden";
 				}
 				else
 				{
-					ToastSingleton.makeToast(_ch.getContext(), "Goed! "+word);
-					_score += word.length()*10;
+					int score = word.length()*10;
+					_message = word+" is goed! (+" + score + ")";
+					_score += score;
 					_guessedWords.add(word);
 				}
 			} else {
-				ToastSingleton.makeToast(_ch.getContext(), "Niet goed! "+word);
+				_message = word + " is fout!";
 			}
 		}
 	}
