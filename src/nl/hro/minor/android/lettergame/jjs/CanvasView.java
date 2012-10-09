@@ -112,8 +112,10 @@ public class CanvasView extends View {
 						_currentDiceDragging = i;
 						_lastPosition[0] = (int) event.getRawX();
 						_lastPosition[1] = (int) event.getRawY();
+						
+						return true; // prevent loop from checking other (remaining) dices
 					}
-					return true; // prevent loop from checking other (remaining) dices
+					
 			    }
 			return true;
 			case MotionEvent.ACTION_MOVE :
