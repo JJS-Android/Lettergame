@@ -64,18 +64,18 @@ public class Dice extends View{
 	public void startAnimation()
 	{
 		_moving = true;
-	 new CountDownTimer(5000, 100) {
+		new CountDownTimer(5000, 100) {
 
-	     public void onTick(long millisUntilFinished) {
-	    	 _currentFrame+=1;
-	     }
-
-	     public void onFinish() {
-	    	 _currentFrame = AlphabetSingleton.randomLetter();
-	    	 _moving = false;
-	     }
+		     public void onTick(long millisUntilFinished) {
+		    	 _currentFrame += 1;
+		     }
+	
+		     public void onFinish() {
+		    	 _currentFrame = AlphabetSingleton.randomLetter();
+		    	 _moving = false;
+		     }
 	     
-	  }.start();
+		}.start();
 	}
 	
 	

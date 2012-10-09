@@ -1,27 +1,63 @@
 package nl.hro.minor.android.lettergame.jjs;
 
 import java.io.IOException;
-
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.widget.Toast;
 
 public class Game extends Activity {
 
 	private ContextHolder ch;
+	private ProgressDialog dialog;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         loadStatics();
-        setContentView(new CanvasView(this));
         ch = ContextHolder.getInstance();
         ch.setContext(this);
+		
+        // Create handler for database creation thread
+        final Handler h = new Handler(){
+		    public void handleMessage(Message msg) {
+		    	// If thread is finished a message will be send to this method
+		    	Log.w("Database", "Creation and opening finished");
+		    	dialog.dismiss();
+		    	
+		    	setContentView(new CanvasView(ch.getContext()));
+		    } 
+		};
+		
+		// Show loading dialog
+		dialog = new ProgressDialog(this);
+        dialog.setMessage("Spel laden...");
+        dialog.show();
         
-		DbHolder dbH = DbHolder.getInstance();
-		dbH.setDb(new DbUtils(this));
+		// Create and open database in a thread
+		Thread t = new Thread() {
+	        public void run() {
+	          try {
+				
+				DbHolder dbH = DbHolder.getInstance();
+				dbH.setDb(new DbUtils(ch.getContext()));
+				
+				// Send empty message to the handler
+				h.sendEmptyMessage(0);
+	
+	          }catch (Exception e) {
+	        	  Log.w("Firing up database", "Failed: " + e.getMessage());
+	          }
+	        }
+        };
+		t.start();
         
     }
 	
