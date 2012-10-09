@@ -12,22 +12,11 @@ public class GameDictionary {
 		super();
 	}
 	
-	public static Boolean checkWord(String word){
-		
-		// Get main context
-		ContextHolder ch = ContextHolder.getInstance();
-
-		DbUtils db = null;
-		SQLiteDatabase dbDictionary = null;
-		try {
-			db = new DbUtils(ch.getContext());
-			//db.createdatabase();
-			//db.opendatabase();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static Boolean checkWord(String word)
+	{
+		// get db
+		DbHolder dbH = DbHolder.getInstance();
+		DbUtils db = dbH.getDb();
 		
 		Cursor result = db.myDataBase.rawQuery("SELECT * FROM dictionary WHERE word='" + word + "'", null);
 
@@ -37,12 +26,10 @@ public class GameDictionary {
 				String dbWord = result.getString(0);
 				if( dbWord.equals(word) ){
 					Log.w("DB", "Match!");
-					db.myDataBase.close();
 					return true;
 				}
 			} while (result.moveToNext());
 		}
-		db.myDataBase.close();
 		return false;
 
 	}

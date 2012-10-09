@@ -1,7 +1,10 @@
 package nl.hro.minor.android.lettergame.jjs;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
@@ -16,6 +19,9 @@ public class Game extends Activity {
         setContentView(new CanvasView(this));
         ch = ContextHolder.getInstance();
         ch.setContext(this);
+        
+		DbHolder dbH = DbHolder.getInstance();
+		dbH.setDb(new DbUtils(this));
         
     }
 	

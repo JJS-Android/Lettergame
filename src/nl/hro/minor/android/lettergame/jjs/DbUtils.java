@@ -19,7 +19,7 @@ public class DbUtils extends SQLiteOpenHelper{
 	private static String DB_NAME = "gamedictionary.db";//the extension may be .sqlite or .db
 	public SQLiteDatabase myDataBase;
 
-	public DbUtils(Context context) throws IOException  {
+	public DbUtils(Context context)  {
 	    super(context,DB_NAME,null,1);
 	    this.mycontext=context;
 	    boolean dbexist = checkdatabase();
@@ -36,7 +36,7 @@ public class DbUtils extends SQLiteOpenHelper{
 
 	}
 
-	public void createdatabase() throws IOException{
+	public void createdatabase() {
 	    boolean dbexist = checkdatabase();
 	    if(dbexist)
 	    {
@@ -48,6 +48,7 @@ public class DbUtils extends SQLiteOpenHelper{
 	    try{
 	    	System.out.println("Try database copy");
 	    		copydatabase();
+	    		opendatabase();
 	        }
 	        catch(IOException e){
 	            throw new Error("Error copying database");
@@ -90,7 +91,7 @@ public class DbUtils extends SQLiteOpenHelper{
 	    myoutput.flush();
 	    myoutput.close();
 	    myinput.close();
-
+	    System.out.println("Database copied.");
 	}
 
 	public void opendatabase() throws SQLException
