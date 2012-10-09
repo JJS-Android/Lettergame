@@ -1,24 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+ 
+    <!--  ListRow Left side Thumbnail image -->
+    <LinearLayout android:id="@+id/item_imgArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/imgbg"
+        android:layout_marginRight="5dip">
+ 
+        <ImageView
+            android:id="@+id/item_img"
+            android:layout_width="61dip"
+            android:layout_height="90dip"/>
+ 
+    </LinearLayout>
+ 
+    <!-- Name of the game-->
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".Main" />
-
-    <Button
-        android:id="@+id/btn_start"
+        android:layout_alignTop="@+id/item_imgArea"
+        android:layout_toRightOf="@+id/item_imgArea"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="15dip" 
+        android:textStyle="bold"/>
+ 
+    <!-- description -->
+    <TextView
+        android:id="@+id/item_desc"
+        android:layout_width="170dip"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_name"
+        android:layout_toRightOf="@+id/item_imgArea"
+        android:textColor="#343434"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip" />
+ 
+    <!-- game genre -->
+    <TextView
+        android:id="@+id/item_genre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_marginBottom="22dp"
-        android:text="@string/btn_startgame_text" />
-
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/item_name"
+        android:gravity="right"
+        android:layout_marginRight="5dip"
+        android:textSize="12dip"
+        android:textColor="#88b631"
+        android:textStyle="bold"/>
+ 
+     <!-- click indicator -->
+     <ImageView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+ 
 </RelativeLayout>
