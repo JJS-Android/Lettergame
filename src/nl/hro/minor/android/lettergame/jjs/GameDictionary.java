@@ -1,9 +1,6 @@
 package nl.hro.minor.android.lettergame.jjs;
 
-import java.io.IOException;
-
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class GameDictionary {

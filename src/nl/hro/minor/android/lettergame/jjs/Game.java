@@ -1,16 +1,13 @@
 package nl.hro.minor.android.lettergame.jjs;
 
-import java.io.IOException;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Game extends Activity {
 

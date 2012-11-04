@@ -5,7 +5,6 @@ import java.util.Random;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.CountDownTimer;
@@ -25,6 +24,7 @@ public class Dice extends View{
 	private int _posX;
 	private int _posY;
 	private boolean _moving;
+	private boolean _coolingDown; 
 	private ContextHolder _ch;
 	private int _size;
 	
@@ -32,6 +32,7 @@ public class Dice extends View{
 	private Display _display;
 	private int _displayWidth;
 	private int _displayHeight;
+	private Rect _location; 
 	private int _square;
 
 	char[] _alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
@@ -59,15 +60,45 @@ public class Dice extends View{
 		_displayHeight = _display.getHeight();
 		
 	}
+	
+	public Rect get_location() {
+		return _location;
+	}
+	public int get_posX() {
+		return _posX;
+	}
 
+	public int get_posY() {
+		return _posY;
+	}
+	
+	public int get_size() {
+		return _posY;
+	}
+	
+	public void collisionAcivity()
+	{
+		if(!_coolingDown){
+		_speedY*=-1;
+		_speedX*=-1;
+		}
+	}
 
 	public void startAnimation()
 	{
 		_moving = true;
-		new CountDownTimer(5000, 100) {
+		_coolingDown = true;
+		final int coolDownTime = 1000;
+		final int timerTime = 5000;
+		new CountDownTimer(timerTime, 100) {
 
 		     public void onTick(long millisUntilFinished) {
 		    	 _currentFrame += 1;
+		    	 if (millisUntilFinished<timerTime-coolDownTime)
+		    	 {
+		    		 _coolingDown = false;
+		    	 }
+		    	 
 		     }
 	
 		     public void onFinish() {
@@ -118,10 +149,10 @@ public class Dice extends View{
 	}
 	
 	public void draw(Canvas canvas){
-		Rect location = new Rect(_posX, _posY, _posX+_size, _posY+_size);
-		canvas.drawBitmap(_bmp, _diceRect, location, null);
+		_location = new Rect(_posX, _posY, _posX+_size, _posY+_size);
+		canvas.drawBitmap(_bmp, _diceRect, _location, null);
 		
-		_bounds.set(location);
+		_bounds.set(_location);
 	}
 	
 	public String getLetter(){

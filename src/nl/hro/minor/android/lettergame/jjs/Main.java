@@ -59,7 +59,6 @@ public class Main extends Activity implements android.view.View.OnClickListener{
     }
     
 
-    @Override
     public void onClick(View v) {
 		//Switch over possible incoming views
     	switch(v.getId()){

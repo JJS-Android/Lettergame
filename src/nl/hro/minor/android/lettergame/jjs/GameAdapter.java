@@ -3,11 +3,8 @@ package nl.hro.minor.android.lettergame.jjs;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.xml.datatype.DatatypeConstants.Field;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,28 +24,22 @@ public class GameAdapter extends BaseAdapter {
 		inflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
-	
 
-
-	@Override
 	public int getCount() {
-		// items in listview adapter
+		// TODO Auto-generated method stub
 		return 2;
 	}
 
-	@Override
-	public Object getItem(int arg0) {
+	public Object getItem(int position) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public long getItemId(int arg0) {
+	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 		if (convertView == null)
@@ -72,6 +63,9 @@ public class GameAdapter extends BaseAdapter {
 		
 		img.setImageResource(Integer.parseInt(game.get("img")));
 		return vi;
-	}	
+	}
+	
+
+
 
 }

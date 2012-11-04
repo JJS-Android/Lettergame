@@ -2,18 +2,16 @@ package nl.hro.minor.android.lettergame.jjs;
 
 import java.util.Random;
 
-import android.util.Log;
-
 //eager alphabet singleton
 public class AlphabetSingleton {
 
 	    private static final AlphabetSingleton _instance = new AlphabetSingleton();
-	    private  final int _frequence[];// = new int[]{74, 16, 12, 59, 189, 8, 34, 24, 65, 15, 22, 35, 22, 100, 60, 16, 1, 64, 37, 67, 20, 28, 15 , 2, 1, 14}; 
+	    private  final int _frequence[];
 	    private static int _matrix[];
 	    	
 	    private AlphabetSingleton() {
-	    	//frequence of letter use    a   b   c   d   e   f   g   h   i   j   k   l   m    n   o   p   q  r   s   t   u   v   w   x  y  z
-	    	_frequence = new int[]{74, 16, 12, 59, 189, 8, 34, 24, 65, 15, 22, 35, 22, 100, 60, 16, 1, 64, 37, 67, 20, 28, 15, 2, 1, 14};
+	    	//frequence of letter use  a   b   c   d   e   f   g   h   i   j   k   l   m    n   o   p   q  r   s   t   u   v   w   x  y  z
+	    	_frequence = new int[]{    74, 16, 12, 59, 189, 8, 34, 24, 65, 15, 22, 35, 22, 100, 60, 16, 1, 64, 37, 67, 20, 28, 15, 2, 1, 14};
 	    	
 	    	_matrix = new int[1000];
 	    	int count =0;

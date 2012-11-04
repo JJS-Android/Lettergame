@@ -8,13 +8,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Paint.Style;
 import android.graphics.Region;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 public class CanvasView extends View {
 	private Context mContext;
@@ -68,6 +66,27 @@ public class CanvasView extends View {
 
 	}
 	
+	public boolean checkBoxCollision(Dice dice1, Dice dice2) {
+	    
+		if(dice1.get_location()!=null && dice2.get_location()!=null)
+		{
+		
+		if(dice1.get_location().intersect(dice2.get_location())) return true;
+		}
+		return false;
+		//int right1 = x1 + width1;
+	    //int right2 = x2 + width2;
+	    //int bottom1 = y1 + height1;
+	    //int bottom2 = y2 + height2;
+
+	    
+	    //// Check if top-left point is in the box
+	    //if(x1<=x2 && x1>= right2 && y1<=y2 && bottom1>=y2) Log.d("boom","bam");
+	    // Check if bottom-right point is in the box
+	    //if (right2 >= x1 && right2 <= right1 && bottom2 >= y2 && bottom2 <= bottom1) return true;
+	    //return false;
+	}
+	
 	public void makeDiceArray()
 	{
 		
@@ -75,7 +94,7 @@ public class CanvasView extends View {
 		
 		for (int i = 0; i < _dices.length; i++) { 
 			Random r = new Random();
-			_dices[i] = new Dice(mContext, r.nextInt((_width-60)), 0, r.nextInt(10)-r.nextInt(10), r.nextInt(12)-r.nextInt(12));
+			_dices[i] = new Dice(mContext, r.nextInt((_width-60)), 100, r.nextInt(10)-r.nextInt(10), r.nextInt(12)-r.nextInt(12));
 			_dices[i].startAnimation();
 	    }
 	}
@@ -89,10 +108,16 @@ public class CanvasView extends View {
 		// draw message
 		canvas.drawText(_message, _width/2, _height-30, _paintWhite);
 		for (int i = 0; i < _dices.length; i++) { 
-			
 			_dices[i].move();
 			_dices[i].updateFrame();
 			_dices[i].draw(canvas);
+
+			for (int c = 0; c < _dices.length; c++) {
+				if(i != c)if (checkBoxCollision(_dices[i], _dices[c]))_dices[i].collisionAcivity();
+
+			}
+			
+
 	       
 	    }
 		invalidate();
@@ -114,7 +139,7 @@ public class CanvasView extends View {
 						
 						return true; // prevent loop from checking other (remaining) dices
 					}
-					
+				
 			    }
 			return true;
 			case MotionEvent.ACTION_MOVE :
