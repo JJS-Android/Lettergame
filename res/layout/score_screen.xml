@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/timeleftTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/timeLeftString" />
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yourScoreString" />
+    <TextView
+        android:id="@+id/totalScoreTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/totalScoreString" />
+	<EditText
+	    android:id="@+id/inputNameEditText"
+	    android:inputType="text"
+	    android:hint="@string/inputNameString"
+	    android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:textSize="18sp">
+	</EditText>
+    <TextView
+        android:id="@+id/youLostEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/youLostString" />
+	<Button
+	    android:id="@+id/submitScoreBtn"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/submitScoreString"
+	    ></Button>
+	<Button
+	    android:id="@+id/submitScoreCancelBtn"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/submitScoreCancelString"
+	    ></Button>
+	<Button
+	    android:id="@+id/nextImageBtn"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/nextImageString"
+	    ></Button>
+
+</LinearLayout>

@@ -5,5 +5,16 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Lettergame</string>
     <string name="btn_startgame_text">Start Game</string>
+       
+    <string name="hello">Hello World, MinigamesActivity!</string>
+    <string name="start">Start</string>
+    <string name="timeLeftString">Overgebleven tijd:</string>
+    <string name="yourScoreString">Score:</string>
+    <string name="totalScoreString">Totale score:</string>
+    <string name="inputNameString">Jouw naam:</string>
+    <string name="submitScoreString">Score opslaan</string>
+    <string name="submitScoreCancelString">Score niet opslaan</string>
+    <string name="nextImageString">Volgende afbeelding</string>
+    <string name="youLostString">Helaas geen highscore</string>
 
 </resources>

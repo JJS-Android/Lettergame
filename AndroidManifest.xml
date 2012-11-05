@@ -28,6 +28,12 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         </activity>
         
+        <activity android:name=".differences.Game1" android:label="@string/app_name"> </activity>
+        <activity android:name=".differences.MinigamesActivity" android:label="@string/app_name"> </activity>
+        <activity android:name=".differences.Score" android:label="@string/app_name"> </activity>
+        <activity android:name=".differences.HighScoreList" android:label="@string/app_name"> </activity>
+        
+
     </application>
 
 </manifest>

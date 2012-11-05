@@ -3,6 +3,8 @@ package nl.hro.minor.android.lettergame.jjs;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import nl.hro.minor.android.lettergame.jjs.differences.Game1;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -53,7 +55,7 @@ AdapterView.OnItemClickListener {
 			}
 			case 1:
 			{
-				i = new Intent(ContextHolder.getInstance().getContext(), Game.class);
+				i = new Intent(ContextHolder.getInstance().getContext(), nl.hro.minor.android.lettergame.jjs.differences.Game1.class);
 			}
 			
 			ContextHolder.getInstance().getContext().startActivity(i);
