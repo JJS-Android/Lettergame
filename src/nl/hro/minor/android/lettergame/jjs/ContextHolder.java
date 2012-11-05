@@ -28,4 +28,5 @@ public class ContextHolder{
 	public Activity getContext(){
 		return _c;
 	}
+
 }

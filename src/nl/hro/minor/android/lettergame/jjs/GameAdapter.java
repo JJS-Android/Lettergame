@@ -5,14 +5,17 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class GameAdapter extends BaseAdapter {
+public class GameAdapter extends BaseAdapter implements
+AdapterView.OnItemClickListener {
 	
 	private Activity activity;
 	private ArrayList<HashMap<String, String>> data;
@@ -26,18 +29,35 @@ public class GameAdapter extends BaseAdapter {
 	}
 
 	public int getCount() {
-		// TODO Auto-generated method stub
+		// items in listview
 		return 2;
 	}
 
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public void onItemClick(AdapterView<?> parent, View v, int position,
+			long id) {
+		
+		Intent i;
+		switch(position)
+		{
+			case 0:
+			{
+				i = new Intent(ContextHolder.getInstance().getContext(), Game.class);
+			}
+			case 1:
+			{
+				i = new Intent(ContextHolder.getInstance().getContext(), Game.class);
+			}
+			
+			ContextHolder.getInstance().getContext().startActivity(i);
+		}
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -58,10 +78,8 @@ public class GameAdapter extends BaseAdapter {
 		name.setText(game.get("name"));
 		description.setText(game.get("description"));
 		genre.setText(game.get("genre"));
-		
-		
-		
 		img.setImageResource(Integer.parseInt(game.get("img")));
+		
 		return vi;
 	}
 	

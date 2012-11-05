@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 

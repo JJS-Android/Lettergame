@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Region;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,23 +67,9 @@ public class CanvasView extends View {
 	
 	public boolean checkBoxCollision(Dice dice1, Dice dice2) {
 	    
-		if(dice1.get_location()!=null && dice2.get_location()!=null)
-		{
-		
-		if(dice1.get_location().intersect(dice2.get_location())) return true;
-		}
+		//if dice location not is null check if it hits another dice
+		if(dice1.get_location()!=null && dice2.get_location()!=null)if(dice1.get_location().intersect(dice2.get_location())) return true;
 		return false;
-		//int right1 = x1 + width1;
-	    //int right2 = x2 + width2;
-	    //int bottom1 = y1 + height1;
-	    //int bottom2 = y2 + height2;
-
-	    
-	    //// Check if top-left point is in the box
-	    //if(x1<=x2 && x1>= right2 && y1<=y2 && bottom1>=y2) Log.d("boom","bam");
-	    // Check if bottom-right point is in the box
-	    //if (right2 >= x1 && right2 <= right1 && bottom2 >= y2 && bottom2 <= bottom1) return true;
-	    //return false;
 	}
 	
 	public void makeDiceArray()

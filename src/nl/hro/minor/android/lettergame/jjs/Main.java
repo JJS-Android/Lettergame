@@ -5,11 +5,9 @@ import java.util.HashMap;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.view.View;
 import android.widget.ListView;
 
-public class Main extends Activity implements android.view.View.OnClickListener{
+public class Main extends Activity {
 
 	ListView list;
     GameAdapter adapter;
@@ -22,10 +20,6 @@ public class Main extends Activity implements android.view.View.OnClickListener{
         // Set the current context (this) in the 'singleton' contextHolder.
         ContextHolder ch = ContextHolder.getInstance();
         ch.setContext(this);
-        
-        // Get the startbutton and attack click listener
-        View aboutButton = findViewById(R.id.btn_start);
-        aboutButton.setOnClickListener(this);
         makeList();
     }
     
@@ -35,15 +29,15 @@ public class Main extends Activity implements android.view.View.OnClickListener{
 
     	ArrayList<HashMap<String, String>> glist = new ArrayList<HashMap<String, String>>();
     	
-    	 //add game 1
+    	 //add game 0
     	 HashMap<String, String> map = new HashMap<String, String>();
     	 map.put("name", "Zoek de verschillen");
-     	 map.put("description", "Vindt in elk level 3 verschill binnen de tijd om door te gaan naar het volgende level.");
+     	 map.put("description", "Vindt in elk level 3 verschillen binnen de tijd om door te gaan naar het volgende level.");
      	 map.put("genres", "puzzle");
      	 map.put("img", ""+R.drawable.magnify);
      	 glist.add(map);
      	 
-    	 //add game 2
+    	 //add game 1
     	 HashMap<String, String> map2 = new HashMap<String, String>();
     	 map2.put("name", "Letterspel");
      	 map2.put("description", "Gebruik de letters om zoveel mogelijk woorden te maken.");
@@ -54,21 +48,11 @@ public class Main extends Activity implements android.view.View.OnClickListener{
      	 list=(ListView)findViewById(R.id.list);
      	 
          adapter=new GameAdapter(this, glist);
+         //start gameAdapter showing possible games
          list.setAdapter(adapter);
+         //set clicklistener for adapterview
+         list.setOnItemClickListener(adapter);
     	 
     }
-    
-
-    public void onClick(View v) {
-		//Switch over possible incoming views
-    	switch(v.getId()){
-			case R.id.btn_start:
-				//Start game if clicked on the Startbutton
-				Intent i = new Intent(this, Game.class);
-				startActivity(i);
-			break;
-		}
-		
-	}
     
 }
