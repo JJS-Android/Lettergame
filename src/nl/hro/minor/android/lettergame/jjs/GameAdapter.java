@@ -19,14 +19,14 @@ import android.widget.TextView;
 public class GameAdapter extends BaseAdapter implements
 AdapterView.OnItemClickListener {
 	
-	private Activity activity;
-	private ArrayList<HashMap<String, String>> data;
-	private static LayoutInflater inflater = null;
+	private Activity _activity;
+	private ArrayList<HashMap<String, String>> _data;
+	private static LayoutInflater _inflater = null;
 
 	public GameAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
-		activity = a;
-		data = d;
-		inflater = (LayoutInflater) activity
+		_activity = a;
+		_data = d;
+		_inflater = (LayoutInflater) _activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -50,22 +50,20 @@ AdapterView.OnItemClickListener {
 		switch(position)
 		{
 			case 0:
-			{
-				i = new Intent(ContextHolder.getInstance().getContext(), Game.class);
-			}
+				i = new Intent(_activity, Game1.class);
+				_activity.startActivity(i);
+				break;
 			case 1:
-			{
-				i = new Intent(ContextHolder.getInstance().getContext(), nl.hro.minor.android.lettergame.jjs.differences.Game1.class);
-			}
-			
-			ContextHolder.getInstance().getContext().startActivity(i);
+				i = new Intent(_activity, Game.class);
+				_activity.startActivity(i);
+				break;
 		}
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 		if (convertView == null)
-			vi = inflater.inflate(R.layout.activity_main, null);
+			vi = _inflater.inflate(R.layout.activity_main, null);
 
 		TextView name = (TextView) vi.findViewById(R.id.item_name); // name
 		TextView description = (TextView) vi.findViewById(R.id.item_desc); // description
@@ -74,7 +72,7 @@ AdapterView.OnItemClickListener {
 		ImageView img = (ImageView) vi.findViewById(R.id.item_img); // img
 
 		HashMap<String, String> game = new HashMap<String, String>();
-		game = data.get(position);
+		game = _data.get(position);
 
 		// Setting the values in the listview
 		name.setText(game.get("name"));
