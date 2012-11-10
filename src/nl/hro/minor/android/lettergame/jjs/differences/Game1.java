@@ -159,8 +159,8 @@ public class Game1 extends Activity implements OnTouchListener {
 		//int currentLevel = lvlmngr.getNewLevel();
 		//lvlmngr.load(currentLevel); 
 		
-		int img1 = getResources().getIdentifier("zdv_0" + currentLevel + "_01","drawable","minigames.JJS.minor.hro");
-		int img2 = getResources().getIdentifier("zdv_0" + currentLevel + "_02","drawable","minigames.JJS.minor.hro");
+		int img1 = getResources().getIdentifier("zdv_0" + currentLevel + "_01","drawable","nl.hro.minor.android.lettergame.jjs.differences");
+		int img2 = getResources().getIdentifier("zdv_0" + currentLevel + "_02","drawable","nl.hro.minor.android.lettergame.jjs.differences");
 		
 		bitmapCompare bmc = new bitmapCompare();
 		//Bitmap diffMap = bmc.getDiffMap(R.drawable.zdv_01_01, R.drawable.zdv_01_02);
