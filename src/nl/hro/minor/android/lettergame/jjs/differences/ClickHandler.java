@@ -1,17 +1,13 @@
 package nl.hro.minor.android.lettergame.jjs.differences;
 
-import nl.hro.minor.android.lettergame.jjs.ContextHolder;
 import nl.hro.minor.android.lettergame.jjs.R;
-
 import java.util.ArrayList;
-
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class ClickHandler {
     
@@ -32,14 +28,13 @@ public class ClickHandler {
     
     public boolean handleClick(int x, int y) {
         if (checkIfRed(x, y)) {
-            Toast.makeText(_ch.getContext(), "Raak!", Toast.LENGTH_SHORT).show();
             _redPoints.add(new Point(x, y));
             loopThroughPoints();
             Game1.clickedRightCount++;
             if (Game1.clickedRightCount == 3) {
                 _returnValue = true;
-                return true;
             }
+            return true;
         } else {
             //TODO: stuff to punish for not guessing correctly
         }

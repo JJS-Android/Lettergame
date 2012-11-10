@@ -1,14 +1,11 @@
 <resources>
 
     <string name="app_name">Lettergame</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Lettergame</string>
     <string name="btn_startgame_text">Start Game</string>
-       
-    <string name="hello">Hello World, MinigamesActivity!</string>
+
     <string name="start">Start</string>
-    <string name="timeLeftString">Overgebleven tijd:</string>
     <string name="yourScoreString">Score:</string>
     <string name="totalScoreString">Totale score:</string>
     <string name="inputNameString">Jouw naam:</string>

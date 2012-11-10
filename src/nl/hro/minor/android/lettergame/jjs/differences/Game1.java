@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class Game1 extends Activity implements OnTouchListener {
     
@@ -28,7 +29,7 @@ public class Game1 extends Activity implements OnTouchListener {
     private ImageView _imageView2;
     private ProgressBar _progessBar;
     private CountDownTimer _countDown;
-    private ProgressDialog dialog;
+    private ProgressDialog _dialog;
     
     public static int clickedRightCount;
     
@@ -69,16 +70,21 @@ public class Game1 extends Activity implements OnTouchListener {
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             // Show loading dialog
-            dialog = new ProgressDialog(this);
-            dialog.setMessage("Controleren...");
-            dialog.show();
+            _dialog = new ProgressDialog(this);
+            _dialog.setMessage("Controleren...");
+            _dialog.show();
             
             // Create handler
             final Handler h = new Handler() {
                 public void handleMessage(Message msg) {
+                    boolean toast = (msg.arg1 == 1) ? true : false;
+                    toastIt(toast);
+                    
+                    // TODO: figure out why this does not work :(
+                    _clickArea.invalidate();
+                    
                     // If thread is finished a message will be send to this method
                     if (_clickhandler.getLastReturnValue()) {
-                        findViewById(R.id.clickAreaView).invalidate();
                         _currentLevel++;
                         clickedRightCount = 0;
                         _countDown.cancel();
@@ -95,7 +101,7 @@ public class Game1 extends Activity implements OnTouchListener {
                             startLevel();
                         }
                     }
-                    dialog.dismiss();
+                    _dialog.dismiss();
                 }
             };
 
@@ -103,7 +109,7 @@ public class Game1 extends Activity implements OnTouchListener {
             final int eventX = (int) event.getX();
             final int eventY = (int) event.getY();
 
-            // Run clickHandler in a seperate thread
+            // Run clickHandler in a separate thread
             Thread t = new Thread(new Runnable() {
                 private int eX = eventX;
                 private int eY = eventY;
@@ -113,10 +119,11 @@ public class Game1 extends Activity implements OnTouchListener {
                         Looper.prepareMainLooper();
                         
                         //pass event into clickhandler for checks
-                        _clickhandler.handleClick(eX, eY);
-
-                        // Send empty message to the handler
-                        h.sendEmptyMessage(0);
+                        boolean result = _clickhandler.handleClick(eX, eY);
+                        // check if it was a hit or not
+                        Message msg = new Message();
+                        msg.arg1 = (result) ? 1 : 0;
+                        h.sendMessage(msg);
                     } catch (Exception e) {
                         Log.e("Clickhandler", "Error in Thread handleClick: " + e.getMessage());
                     }
@@ -126,10 +133,15 @@ public class Game1 extends Activity implements OnTouchListener {
         }
         return false;
     }
+    
+    private void toastIt(boolean result) {
+        String msg = (result) ? "RAAK!!!" : "Mis :(";
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 
     private void loadImgs() {
         //int currentLevel = lvlmngr.getNewLevel();
-        //lvlmngr.load(currentLevel); 
+        //lvlmngr.load(currentLevel);
         
         int img1 = getResources().getIdentifier("zdv_0" + _currentLevel + "_01","drawable","nl.hro.minor.android.lettergame.jjs");
         int img2 = getResources().getIdentifier("zdv_0" + _currentLevel + "_02","drawable","nl.hro.minor.android.lettergame.jjs");
@@ -167,5 +179,24 @@ public class Game1 extends Activity implements OnTouchListener {
         Intent i = new Intent(_ch.getContext(), Score.class);
         i.putExtra("isFinished", true);
         startActivity(i);
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    
+    @Override
+    public void onPause() {
+        super.onPause();
+        clickedRightCount = 0;
+        _countDown.cancel();
+    }
+    
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        clickedRightCount = 0;
+        _countDown.cancel();
     }
 }

@@ -19,22 +19,17 @@ public class Score extends Activity implements OnClickListener {
 	private int _score = 0;
 	private int _totalScore;
 	private TextView _scoreView;
-	private TextView _timeLeftView;
 	private TextView _totalScoreView;
 	
-	private DBAdapter db;
+	private DBAdapter _db;
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_screen);
         
-		// database
-		db = new DBAdapter(this);
-        
         // get score fields
         _scoreView = (TextView) findViewById(R.id.scoreTextView);
-        _timeLeftView = (TextView) findViewById(R.id.timeleftTextView);
         _totalScoreView = (TextView) findViewById(R.id.totalScoreTextView);
         
         int timeLeft = 0;
@@ -45,11 +40,8 @@ public class Score extends Activity implements OnClickListener {
             timeLeft = extras.getInt("timeLeft");
             isFinished = extras.getBoolean("isFinished");
         }
-        _timeLeftView.setText(getString(R.string.timeLeftString) + " " + timeLeft);
         
-        // get static final playtime
-    	int playTime = Game1.playTime;
-    	_score = _score + (playTime - timeLeft);
+    	_score += timeLeft;
         _scoreView.setText(getString(R.string.yourScoreString) + " " + _score);
 
         // add score to the total
@@ -70,6 +62,8 @@ public class Score extends Activity implements OnClickListener {
         
         // show or hide buttons
         if (isFinished) {
+            // database
+            _db = new DBAdapter(this);
         	if (this.isInHighscore(_totalScore)) {
 	            submitScoreBtn.setOnClickListener(this);
 	            submitScoreCancelBtn.setOnClickListener(this);
@@ -88,7 +82,6 @@ public class Score extends Activity implements OnClickListener {
         }
     }
 
-	//@Override
 	public void onClick(View v) {
 		switch(v.getId()) {
 			case R.id.submitScoreBtn :
@@ -96,9 +89,9 @@ public class Score extends Activity implements OnClickListener {
 				EditText nameEditText = (EditText)findViewById(R.id.inputNameEditText);
 				String name = nameEditText.getText().toString();
 
-				db.open();
-				db.addScore(name, _totalScore);
-				db.close();
+				_db.open();
+				_db.addScore(name, _totalScore);
+				_db.close();
 				
 				Intent i = new Intent(this, HighScoreList.class);
 				startActivity(i);
@@ -118,15 +111,15 @@ public class Score extends Activity implements OnClickListener {
 		int count = 0;
 		boolean inHighscore = false;
 		// open database
-		db.open();
-		Cursor c = db.getAllScores();
+		_db.open();
+		Cursor c = _db.getAllScores();
 		if (c.moveToFirst())
 		{
 			do {
 				count++;
 				// if score is higher than current scores but not passed maximum scores
 				if (score > c.getInt(2) && count <= _maxScores) {
-					db.close();
+					_db.close();
 					return true;
 				}
 			} while (c.moveToNext());
@@ -135,7 +128,7 @@ public class Score extends Activity implements OnClickListener {
 		if (c.getCount() < _maxScores) {
 			inHighscore = true;
 		}
-		db.close();
+		_db.close();
 		return inHighscore;
 	}
 }
