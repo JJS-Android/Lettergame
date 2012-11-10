@@ -8,7 +8,6 @@
         android:id="@+id/clickAreaView"
         android:layout_width="480px"
         android:layout_height="360px"
-        android:visibility="gone"
          />
     <ImageView
         android:id="@+id/imageView1"
