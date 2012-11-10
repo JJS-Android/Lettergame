@@ -2,10 +2,16 @@ package nl.hro.minor.android.lettergame.jjs.differences;
 
 import nl.hro.minor.android.lettergame.jjs.R;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -57,6 +63,8 @@ public class Game1 extends Activity implements OnTouchListener {
         
     }
 
+    private ProgressDialog dialog;
+    
     public boolean onTouch(View v, MotionEvent event) {
 
         
@@ -64,23 +72,62 @@ public class Game1 extends Activity implements OnTouchListener {
         
         if (action == MotionEvent.ACTION_DOWN)
         {
-        	//pass event into clickhandler for checks
-        	boolean finished = _clikhandler.handleClick(event);
-        	if (finished) {
-        		currentLevel++;
-        		clickedRightCount = 0;
-        		countDown.cancel();
-        		Intent i = new Intent(ch.getContext(), Score.class);
-        		i.putExtra("timeLeft", (_timeLeft/1000));
-        		if (currentLevel > 3) {
-	        		i.putExtra("isFinished", true);
-	        		startActivity(i);
-        		} else {
-	        		i.putExtra("isFinished", false);
-	        		startActivity(i);
-	        		startLevel();
-        		}
-        	}
+        	
+        	// Show loading dialog
+    		dialog = new ProgressDialog(this);
+            dialog.setMessage("Controleren...");
+            dialog.show();
+            
+            // Create handler
+            final Handler h = new Handler(){
+    		    public void handleMessage(Message msg) {
+    		    	// If thread is finished a message will be send to this method
+    		    	
+    		    	if (_clikhandler.getLastReturnValue()) {
+    	        		currentLevel++;
+    	        		clickedRightCount = 0;
+    	        		countDown.cancel();
+    	        		Intent i = new Intent(ch.getContext(), Score.class);
+    	        		i.putExtra("timeLeft", (_timeLeft/1000));
+    	        		if (currentLevel > 3) {
+    		        		i.putExtra("isFinished", true);
+    		        		startActivity(i);
+    	        		} else {
+    		        		i.putExtra("isFinished", false);
+    		        		startActivity(i);
+    		        		startLevel();
+    	        		}
+    	        	}
+    		    	
+    		    	Log.w("PixelCheck", "Done, close loading message");
+    		    	dialog.dismiss();
+    		    	
+    		    } 
+    		};
+    		
+    		final MotionEvent fEvent = event;
+    		
+    		// Run clickHandler in a seperate thread
+    		Thread t = new Thread() {
+    	        public void run() {
+    	          try {
+    	        	  
+    	        	//Looper.prepare(); // No idea why, just have to use it
+    	        	Looper.prepareMainLooper();
+    				
+    	        	//pass event into clickhandler for checks
+    	          	_clikhandler.handleClick(fEvent);
+    				
+    				// Send empty message to the handler
+    				h.sendEmptyMessage(0);
+    	
+    	          }catch (Exception e) {
+    	        	  Log.w("Clickhandler", "PixelCheck Failed: " + e.getMessage());
+    	          }
+    	        }
+            };
+    		t.start();
+    		
         }
        
         
@@ -112,8 +159,8 @@ public class Game1 extends Activity implements OnTouchListener {
 		//int currentLevel = lvlmngr.getNewLevel();
 		//lvlmngr.load(currentLevel); 
 		
-		int img1 = getResources().getIdentifier("zdv_0" + currentLevel + "_01","drawable","nl.hro.minor.android.lettergame.jjs");
-		int img2 = getResources().getIdentifier("zdv_0" + currentLevel + "_02","drawable","nl.hro.minor.android.lettergame.jjs");
+		int img1 = getResources().getIdentifier("zdv_0" + currentLevel + "_01","drawable","minigames.JJS.minor.hro");
+		int img2 = getResources().getIdentifier("zdv_0" + currentLevel + "_02","drawable","minigames.JJS.minor.hro");
 		
 		bitmapCompare bmc = new bitmapCompare();
 		//Bitmap diffMap = bmc.getDiffMap(R.drawable.zdv_01_01, R.drawable.zdv_01_02);

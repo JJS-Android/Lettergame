@@ -1,8 +1,9 @@
 package nl.hro.minor.android.lettergame.jjs.differences;
 
+import nl.hro.minor.android.lettergame.jjs.R;
+
 import java.util.ArrayList;
 
-import nl.hro.minor.android.lettergame.jjs.R;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -16,6 +17,7 @@ public class ClickHandler {
 	
 private Bitmap _bitmap;
 private contextHolder _ch =  contextHolder.getInstance();
+private boolean returnValue = false;
 
 private ArrayList<Point> _redPoints = new ArrayList<Point>();	
 	
@@ -42,6 +44,7 @@ private ArrayList<Point> _redPoints = new ArrayList<Point>();
 		 Game1.clickedRightCount++;
 		 if (Game1.clickedRightCount == 3)
 		 {
+			 returnValue = true;
 			 return true;
 		 }
 		}
@@ -53,8 +56,13 @@ private ArrayList<Point> _redPoints = new ArrayList<Point>();
         
     	_ch.getContext().findViewById(R.id.clickAreaView).invalidate();
     	
+    	returnValue = false;
     	return false;
 		
+	}
+	
+	public boolean getLastReturnValue(){
+		return returnValue;
 	}
 	
     private void checkforRedpixel(int x, int y)
