@@ -52,6 +52,7 @@ public class ScoreScreen extends Activity implements OnClickListener {
 		case R.id.btnPlayAgain:
 			// Restart the game (starting GamePogo class - which was finished when the game ended)
 			Intent i = new Intent(this, GamePogo.class);
+			this.finish(); // Quit this activity (so it won't break the back button while you're ingame)
 			startActivity(i);
 		break;
 }
