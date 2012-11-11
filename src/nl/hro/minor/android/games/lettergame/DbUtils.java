@@ -61,7 +61,7 @@ public class DbUtils extends SQLiteOpenHelper{
 	        String myPath = DB_PATH + DB_NAME;
 	        File dbfile = new File(myPath);
 	        checkdb = dbfile.exists();
-	    }
+	    } 
 	    catch(SQLiteException e){
 	        System.out.println("Database doesn't exist");
 	    }
