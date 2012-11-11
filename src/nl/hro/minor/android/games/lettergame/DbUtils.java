@@ -15,7 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbUtils extends SQLiteOpenHelper{
 	private Context mycontext;
 
-	private String DB_PATH = "/data/data/nl.hro.minor.android.games/lettergame/databases/";
+	private String DB_PATH = "/data/data/nl.hro.minor.android.games/databases/";
 	private static String DB_NAME = "gamedictionary.db";//the extension may be .sqlite or .db
 	public SQLiteDatabase myDataBase;
 
