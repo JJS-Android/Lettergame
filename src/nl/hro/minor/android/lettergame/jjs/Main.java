@@ -40,7 +40,7 @@ public class Main extends Activity {
     	 //add game 1
     	 HashMap<String, String> map2 = new HashMap<String, String>();
     	 map2.put("name", "Letterspel");
-     	 map2.put("description", "Gebruik de letters om zoveel mogelijk woorden te maken.");
+     	 map2.put("description", "Gebruik de letters om zoveel mogelijk woorden te maken en haal de 10.000 punten. Koop voor 200 een nieuwe letter als je er echt niet meer uitkomt.");
      	 map2.put("genres", "taal");
      	 map2.put("img", ""+R.drawable.letter);
      	 glist.add(map2);

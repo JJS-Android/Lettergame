@@ -111,10 +111,7 @@ public class Dice extends View{
 	
 	public void updateFrame() {
 		
-		if(_currentFrame > _frames)
-		{
-			_currentFrame = 1;
-		}
+		if(_currentFrame > _frames)	_currentFrame = 1;
 		
 		_diceRect.top = _currentFrame * _size - _size; 
 		_diceRect.bottom = _currentFrame * _size;
@@ -130,15 +127,9 @@ public class Dice extends View{
 			int nextPosX = _posX +=_speedX;
 			int nextPosY = _posY +=_speedY;
 			
-			if(nextPosX > _displayWidth - _size || nextPosX < 0)
-			{
-				_speedX *= -1;
-			}
+			if(nextPosX > _displayWidth - _size || nextPosX < 0) _speedX *= -1;
 			
-			if(nextPosY > _displayHeight - _size - 150 || nextPosY < 0) // Jordi: Wat is die 130 hardcoded?
-			{
-				_speedY *= -1;
-			}
+			if(nextPosY > _displayHeight - _size - 150 || nextPosY < 0) _speedY *= -1;
 			
 			_posX = nextPosX;
 			_posY = nextPosY;
@@ -178,22 +169,11 @@ public class Dice extends View{
 		// Convert the 'draghandle' from the top left corner to the center of the dice
 		int nextPosX = posX - (_size/ 2 );
 		int nextPosY = posY - (_size / 2 );
-		
-		/*
-		Log.w("pos", "----");
-		Log.w("pos", _size+ ", " + _size);
-		Log.w("pos", nextPosX + ", " + nextPosY);
-		Log.w("pos", _displayWidth + ", " + _displayHeight);
-		*/
-		
+
 		// Check if the position is within canvasview bounds
-		if(nextPosX > _displayWidth){
-			nextPosX = _displayWidth - this.getWidth();
-		}
+		if(nextPosX > _displayWidth) nextPosX = _displayWidth - this.getWidth();
 		
-		if(nextPosY > _displayHeight){
-			nextPosY = _displayHeight - this.getHeight();
-		}
+		if(nextPosY > _displayHeight) nextPosY = _displayHeight - this.getHeight();
 		
 		// Set new X and Y
 		_posX = nextPosX;

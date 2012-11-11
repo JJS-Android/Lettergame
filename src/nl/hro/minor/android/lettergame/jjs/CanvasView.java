@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Region;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +18,7 @@ public class CanvasView extends View {
 	private Context mContext;
 	private Dice[] _dices; 
 	private GameBoard _gameBoard;
+	private DiceButton _diceButton;
 	private int _width;
 	private int _height;
 	private ContextHolder _ch;
@@ -44,6 +46,8 @@ public class CanvasView extends View {
 		_height = display.getHeight();
 		//make gameboard
 		_gameBoard = new GameBoard(_width, _height);
+		//make diceButton
+		_diceButton = new DiceButton(_width, _height);
 		_score = 0;
 		//throw dices
 		makeDiceArray();
@@ -65,14 +69,14 @@ public class CanvasView extends View {
 
 	}
 	
-	public boolean checkBoxCollision(Dice dice1, Dice dice2) {
+	private boolean checkBoxCollision(Dice dice1, Dice dice2) {
 	    
 		//if dice location not is null check if it hits another dice
 		if(dice1.get_location()!=null && dice2.get_location()!=null)if(dice1.get_location().intersect(dice2.get_location())) return true;
 		return false;
 	}
 	
-	public void makeDiceArray()
+	private void makeDiceArray()
 	{
 		
 		_dices = new Dice[8];
@@ -84,12 +88,40 @@ public class CanvasView extends View {
 	    }
 	}
 	
+	private void extraDice()
+	{
+		
+		if(_diceButton.isActive())
+		{
+			int diceCount = _dices.length;
+			Dice[] temp = new Dice[diceCount+1];
+			for (int i = 0; i < _dices.length; i++) { 
+				temp[i] = _dices[i];
+				
+		    }
+			
+			Random r = new Random();
+			Log.d("test", ""+diceCount);
+			temp[diceCount] = new Dice(mContext, r.nextInt((_width-60)), 100, r.nextInt(10)-r.nextInt(10), r.nextInt(12)-r.nextInt(12));
+			temp[diceCount].startAnimation();
+			
+			_dices = temp;
+			_score-= 200;
+		}
+		_diceButton.setActive(false);
+	}
+	
 	@Override
 	protected void onDraw(Canvas canvas){
 		// draw score text
 		canvas.drawText("Score: "+_score, 15, 30, _paintRed);
+		if(_score>=200) _diceButton.setActive(true);
+		
 		// draw gameboard (destination squares)
 		_gameBoard.draw(canvas);
+		//draw button to het extra dice
+		if(_diceButton.isActive()) _diceButton.draw(canvas);
+		
 		// draw message
 		canvas.drawText(_message, _width/2, _height-30, _paintWhite);
 		for (int i = 0; i < _dices.length; i++) { 
@@ -124,6 +156,9 @@ public class CanvasView extends View {
 						
 						return true; // prevent loop from checking other (remaining) dices
 					}
+					//check if player wants to buy extra letter
+					if(_diceButton.getBounds().contains((int) event.getRawX(), (int) event.getRawY())) extraDice();
+					
 				
 			    }
 			return true;

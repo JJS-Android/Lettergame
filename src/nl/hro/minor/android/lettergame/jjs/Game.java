@@ -65,6 +65,7 @@ public class Game extends Activity {
 		opts.inScaled = false;  
 		Dice._bmp = BitmapFactory.decodeResource(res, R.drawable.dice, opts);
 		GameBoard._bmp = BitmapFactory.decodeResource(res, R.drawable.board, opts);
+		DiceButton._bmp = BitmapFactory.decodeResource(res, R.drawable.plus, opts);
 	}
 
 }

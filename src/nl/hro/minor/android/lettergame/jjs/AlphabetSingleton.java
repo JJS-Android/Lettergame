@@ -10,8 +10,8 @@ public class AlphabetSingleton {
 	    private static int _matrix[];
 	    	
 	    private AlphabetSingleton() {
-	    	//frequence of letter use  a   b   c   d   e   f   g   h   i   j   k   l   m    n   o   p   q  r   s   t   u   v   w   x  y  z
-	    	_frequence = new int[]{    74, 16, 12, 59, 189, 8, 34, 24, 65, 15, 22, 35, 22, 100, 60, 16, 1, 64, 37, 67, 20, 28, 15, 2, 1, 14};
+	    	//frequence of letter use  a  b  c  d  e   f  g  h  i  j  k  l  m  n   o  p  q  r  s  t  u  v  w  x  y  z
+	    	_frequence = new int[]{    7, 1, 1, 4, 18, 1, 3, 2, 6, 1, 2, 3, 2, 10, 6, 1, 1, 6, 3, 6, 2, 2, 1, 1, 1, 1};
 	    	
 	    	_matrix = new int[1000];
 	    	int count =0;
@@ -30,7 +30,7 @@ public class AlphabetSingleton {
 	    public static int randomLetter()
 	    {
 		    Random r = new Random();
-		    int n = _matrix[r.nextInt(1000)];
+		    int n = _matrix[r.nextInt(77)];
 		    return n;
 		    
 	    }
