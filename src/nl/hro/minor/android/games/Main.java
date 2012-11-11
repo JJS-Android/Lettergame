@@ -1,7 +1,9 @@
-package nl.hro.minor.android.lettergame.jjs;
+package nl.hro.minor.android.games;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import nl.hro.minor.android.games.lettergame.ContextHolder;
 
 import android.os.Bundle;
 import android.app.Activity;

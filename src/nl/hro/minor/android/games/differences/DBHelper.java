@@ -1,4 +1,4 @@
-package nl.hro.minor.android.lettergame.jjs.differences;
+package nl.hro.minor.android.games.differences;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

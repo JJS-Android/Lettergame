@@ -1,5 +1,6 @@
-package nl.hro.minor.android.lettergame.jjs;
+package nl.hro.minor.android.games.lettergame;
 
+import nl.hro.minor.android.games.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.Resources;

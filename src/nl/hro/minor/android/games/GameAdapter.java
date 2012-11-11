@@ -1,9 +1,10 @@
-package nl.hro.minor.android.lettergame.jjs;
+package nl.hro.minor.android.games;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import nl.hro.minor.android.lettergame.jjs.differences.Game1;
+import nl.hro.minor.android.games.differences.Game1;
+import nl.hro.minor.android.games.lettergame.Game;
 
 import android.app.Activity;
 import android.content.Context;

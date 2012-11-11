@@ -1,4 +1,4 @@
-package nl.hro.minor.android.lettergame.jjs.differences;
+package nl.hro.minor.android.games.differences;
 
 import android.content.ContentValues;
 import android.content.Context;

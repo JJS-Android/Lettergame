@@ -1,4 +1,4 @@
-package nl.hro.minor.android.lettergame.jjs;
+package nl.hro.minor.android.games.lettergame;
 
 public class DbHolder{
 

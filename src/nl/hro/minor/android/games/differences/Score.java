@@ -1,7 +1,6 @@
-package nl.hro.minor.android.lettergame.jjs.differences;
+package nl.hro.minor.android.games.differences;
 
-import nl.hro.minor.android.lettergame.jjs.R;
-
+import nl.hro.minor.android.games.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;

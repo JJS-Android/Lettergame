@@ -1,11 +1,11 @@
-package nl.hro.minor.android.lettergame.jjs.differences;
+package nl.hro.minor.android.games.differences;
 
-import nl.hro.minor.android.lettergame.jjs.R;
+
+import nl.hro.minor.android.games.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -143,8 +143,8 @@ public class Game1 extends Activity implements OnTouchListener {
         //int currentLevel = lvlmngr.getNewLevel();
         //lvlmngr.load(currentLevel);
         
-        int img1 = getResources().getIdentifier("zdv_0" + _currentLevel + "_01","drawable","nl.hro.minor.android.lettergame.jjs");
-        int img2 = getResources().getIdentifier("zdv_0" + _currentLevel + "_02","drawable","nl.hro.minor.android.lettergame.jjs");
+        int img1 = getResources().getIdentifier("zdv_0" + _currentLevel + "_01","drawable","nl.hro.minor.android.games.lettergame");
+        int img2 = getResources().getIdentifier("zdv_0" + _currentLevel + "_02","drawable","nl.hro.minor.android.games.lettergame");
         
         bitmapCompare bmc = new bitmapCompare();
         //Bitmap diffMap = bmc.getDiffMap(R.drawable.zdv_01_01, R.drawable.zdv_01_02);

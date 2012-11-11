@@ -1,7 +1,8 @@
-package nl.hro.minor.android.lettergame.jjs.differences;
+package nl.hro.minor.android.games.differences;
 
-import nl.hro.minor.android.lettergame.jjs.R;
 import java.util.ArrayList;
+
+import nl.hro.minor.android.games.R;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
