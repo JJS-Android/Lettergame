@@ -33,7 +33,7 @@ AdapterView.OnItemClickListener {
 
 	public int getCount() {
 		// items in listview
-		return 2;
+		return 3;
 	}
 
 	public Object getItem(int position) {
@@ -57,6 +57,11 @@ AdapterView.OnItemClickListener {
 			case 1:
 				i = new Intent(_activity, Game.class);
 				_activity.startActivity(i);
+				break;
+			case 2:
+				//start pongo
+				//i = new Intent(_activity, Game2.class);
+				//_activity.startActivity(i);
 				break;
 		}
 	}
