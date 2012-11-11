@@ -7,9 +7,12 @@ import android.os.Handler;
 
 public class AiPlayer extends Player {
 
-	TimerTask moveTask;
+	private TimerTask moveTask;
 	final Handler handler = new Handler();
-	Timer t = new Timer();
+	private Timer t = new Timer();
+	private boolean _makeSquire = false;
+	private int _path[] = new int[]{2,2,2,4,4,4,1,1,1,3,3,3};
+	private int _pathPosition = 0;
 	
 	private int _minLimit = 1;
 	private int _maxLimit = 4;
@@ -44,8 +47,24 @@ public class AiPlayer extends Player {
 	        public void run() {
 			handler.post(new Runnable() {
 					public void run() {
+						if (1 + (int) (Math.random() * ((10 - 1) + 1))==10)_makeSquire=true;
+						
+						if(_makeSquire == true)
+						{
+							if (_pathPosition>=11)
+							{
+								_pathPosition = 0;
+								_makeSquire = false;
+								
+							}
+							self.move(_path[_pathPosition]);
+							_pathPosition++;
+						}
+						else
+						{
 						int goTo = _minLimit + (int) (Math.random() * ((_maxLimit - _minLimit) + 1));
 						self.move(goTo);
+						}
 						//Log.w("AiPlayer", "AiP " + self._id + " moved to: " + goTo);
 					}
 				});
