@@ -15,7 +15,7 @@ public class GamePogo extends Activity {
 
 	private GameView _gv;
 	private boolean _gamePaused = false;
-	private boolean _activityOrientation = true;
+	private String _activityOrientation = "portrait";
 	
 	/** Called when the activity is first created. */
     @Override
@@ -69,13 +69,17 @@ public class GamePogo extends Activity {
 	}
 	
 	private void flipOrientation(){
-		if(_activityOrientation){
+		if(_activityOrientation.equals("portrait")){
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-			_activityOrientation = false;
+			_activityOrientation = "landscape";
 		} else {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-			_activityOrientation = true;
+			_activityOrientation = "portrait";
 		}
+	}
+	
+	public String getOrientation(){
+		return _activityOrientation;
 	}
 
     public boolean onCreateOptionsMenu(Menu menu) {

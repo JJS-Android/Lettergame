@@ -2,7 +2,9 @@ package nl.hro.minor.android.games.pogo;
 
 import nl.hro.minor.android.games.R;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +16,9 @@ public class ScoreScreen extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Set the correct screen orientation
+		setOrientation();
 		
 		setContentView(R.layout.finalscorescreen);
 		
@@ -49,13 +54,26 @@ public class ScoreScreen extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		
 		switch (v.getId()) {
-		case R.id.btnPlayAgain:
-			// Restart the game (starting GamePogo class - which was finished when the game ended)
-			Intent i = new Intent(this, GamePogo.class);
-			this.finish(); // Quit this activity (so it won't break the back button while you're ingame)
-			startActivity(i);
-		break;
-}
+			case R.id.btnPlayAgain:
+				// Restart the game (starting GamePogo class - which was finished when the game ended)
+				Intent i = new Intent(this, GamePogo.class);
+				this.finish(); // Quit this activity (so it won't break the back button while you're ingame)
+				startActivity(i);
+			break;
+		}
+	}
+	
+	private void setOrientation(){
+		
+		// Get the GamePogo instance
+		GamePogo c = (GamePogo) ContextHolder.getInstance().getContext();
+		
+		// Determine which orientation is the current orientation and set it that way
+		if(c.getOrientation().equals("portrait")){
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
 	}
 
 }
