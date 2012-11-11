@@ -14,7 +14,7 @@
     <string name="nextImageString">Volgende afbeelding</string>
     <string name="youLostString">Helaas geen highscore</string>
      <string name="btn_play_again">Play Again</string>
-    <string name="menuItem_flipOrientation">Flip screen</string>
+    <string name="menuItem_flipOrientation">Tablet modus</string>
     <string name="hello">Hello World, JJSPogoActivity!</string>
 
 </resources>

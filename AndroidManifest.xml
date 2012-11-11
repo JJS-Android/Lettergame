@@ -32,13 +32,15 @@
             android:name=".pogo.GamePogo"
             android:label="@string/app_name"
             android:configChanges="orientation"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         </activity>
         
         <activity android:name=".pogo.ScoreScreen"
             android:label="@string/app_name"
             android:configChanges="orientation"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         </activity>
         
         <activity android:name=".differences.Game1" android:label="@string/app_name"> </activity>

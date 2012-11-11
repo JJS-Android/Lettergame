@@ -2,8 +2,11 @@ package nl.hro.minor.android.games.pogo;
 
 import nl.hro.minor.android.games.R;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,7 +15,7 @@ public class GamePogo extends Activity {
 
 	private GameView _gv;
 	private boolean _gamePaused = false;
-	private String _activityOrientation = "landscape";
+	private boolean _activityOrientation = true;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -25,6 +28,12 @@ public class GamePogo extends Activity {
         
         _gv = new GameView(this);
         setContentView(_gv);
+        
+        // Flip orientation (to landscape if device is tablet
+        if(isTablet(this)){
+        	Log.w("Orientation", "Flipped, tablet detected");
+        	flipOrientation();
+        }
         
     }
 
@@ -60,12 +69,12 @@ public class GamePogo extends Activity {
 	}
 	
 	private void flipOrientation(){
-		if(_activityOrientation == "portrait"){
+		if(_activityOrientation){
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-			_activityOrientation = "landscape";
+			_activityOrientation = false;
 		} else {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-			_activityOrientation = "portrait";
+			_activityOrientation = true;
 		}
 	}
 
@@ -83,6 +92,12 @@ public class GamePogo extends Activity {
 		    return true;
 	    }
 	    return false;
+    }
+    
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 	
 	
