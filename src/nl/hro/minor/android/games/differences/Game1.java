@@ -23,7 +23,6 @@ public class Game1 extends Activity implements OnTouchListener {
     
     private ClickHandler _clickhandler;
     private contextHolder _ch;
-    private levelManager _lvlmngr = new levelManager();
     private ImageView _clickArea;
     private ImageView _imageView1;
     private ImageView _imageView2;

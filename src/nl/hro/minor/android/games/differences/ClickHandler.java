@@ -80,7 +80,7 @@ public class ClickHandler {
         
         for (Point point:points ) {
             if (checkIfRed(point.x, point.y)) {
-                //_redPoints.add(point); // this caused an infinite loop, what was its purpose?
+                _redPoints.add(point); // this caused an infinite loop, what was its purpose?
                 reColorPixel(point);
             }
         }
