@@ -10,11 +10,10 @@
     <string name="totalScoreString">Totale score:</string>
     <string name="inputNameString">Jouw naam:</string>
     <string name="submitScoreString">Score opslaan</string>
-    <string name="submitScoreCancelString">Score niet opslaan</string>
     <string name="nextImageString">Volgende afbeelding</string>
     <string name="youLostString">Helaas geen highscore</string>
-     <string name="btn_play_again">Play Again</string>
+    <string name="btn_play_again">Play Again</string>
     <string name="menuItem_flipOrientation">Tablet modus</string>
-    <string name="hello">Hello World, JJSPogoActivity!</string>
+    <string name="exitString">Terug naar hoofdmenu</string>
 
 </resources>

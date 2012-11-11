@@ -34,16 +34,16 @@
 	    android:text="@string/submitScoreString"
 	    ></Button>
 	<Button
-	    android:id="@+id/submitScoreCancelBtn"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/submitScoreCancelString"
-	    ></Button>
-	<Button
 	    android:id="@+id/nextImageBtn"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="@string/nextImageString"
+	    ></Button>
+	<Button
+	    android:id="@+id/exitBtn"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/exitString"
 	    ></Button>
 
 </LinearLayout>

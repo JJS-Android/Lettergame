@@ -1,5 +1,6 @@
 package nl.hro.minor.android.games.differences;
 
+import nl.hro.minor.android.games.Main;
 import nl.hro.minor.android.games.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -52,31 +53,32 @@ public class Score extends Activity implements OnClickListener {
         
         // get the buttons
         View submitScoreBtn = findViewById(R.id.submitScoreBtn);
-        View submitScoreCancelBtn = findViewById(R.id.submitScoreCancelBtn);
         View nextImageBtn = findViewById(R.id.nextImageBtn);
     	View inputNameEditText = findViewById(R.id.inputNameEditText);
     	View youLostEditText = findViewById(R.id.youLostEditText);
-    	
+    	View exitBtn = findViewById(R.id.exitBtn);
+
+    	// set listners
+    	exitBtn.setOnClickListener(this);
     	nextImageBtn.setOnClickListener(this);
         
         // show or hide buttons
         if (isFinished) {
             // database
             _db = new DBAdapter(this);
+            // if score is in highscore
         	if (this.isInHighscore(_totalScore)) {
 	            submitScoreBtn.setOnClickListener(this);
-	            submitScoreCancelBtn.setOnClickListener(this);
 	            youLostEditText.setVisibility(View.GONE);
         	} else {
             	inputNameEditText.setVisibility(View.GONE);
                 submitScoreBtn.setVisibility(View.GONE);
-                submitScoreCancelBtn.setVisibility(View.GONE);
         	}
             nextImageBtn.setVisibility(View.GONE);
         } else {
+            exitBtn.setVisibility(View.GONE);
         	inputNameEditText.setVisibility(View.GONE);
             submitScoreBtn.setVisibility(View.GONE);
-            submitScoreCancelBtn.setVisibility(View.GONE);
             youLostEditText.setVisibility(View.GONE);
         }
     }
@@ -96,12 +98,14 @@ public class Score extends Activity implements OnClickListener {
 				startActivity(i);
 			break;
 			case R.id.nextImageBtn :
-				// TODO: add next image function call
-				Log.w("Finish", "Returning to game...");
+			    // close score screen
 				this.finish();
 			break;
-			case R.id.submitScoreCancelBtn :
-				this.finish();
+			case R.id.exitBtn :
+			    // restart mainmenu
+			    Activity ch = contextHolder.getInstance().getContext();
+			    Intent j = new Intent(ch, Main.class);
+			    ch.startActivity(j);
 			break;
 		}
 	}

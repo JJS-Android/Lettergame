@@ -79,9 +79,6 @@ public class Game1 extends Activity implements OnTouchListener {
                     boolean toast = (msg.arg1 == 1) ? true : false;
                     toastIt(toast);
                     
-                    // TODO: figure out why this does not work :(
-                    _clickArea.invalidate();
-                    
                     // If thread is finished a message will be send to this method
                     if (_clickhandler.getLastReturnValue()) {
                         _currentLevel++;
@@ -134,7 +131,7 @@ public class Game1 extends Activity implements OnTouchListener {
     }
     
     private void toastIt(boolean result) {
-        String msg = (result) ? "RAAK!!!" : "Mis :(";
+        String msg = (result) ? "RAAK!" : "Mis :(";
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
