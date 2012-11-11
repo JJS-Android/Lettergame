@@ -49,8 +49,8 @@ public class Main extends Activity {
      	 
     	 //add game 3
     	 HashMap<String, String> map3 = new HashMap<String, String>();
-    	 map3.put("name", "Pongo");
-     	 map3.put("description", "Pongo beschrijving");
+    	 map3.put("name", "Pogo");
+     	 map3.put("description", "Bestuur jou speler (#1) door je apparaat te bewegen (overhellen naar voren, achter, links en rechts). Maak zoveel mogelijk blokjes in jou kleur en spring vervolgens op een wit blokje om je punten te innen. Om de zoveel tijd komt er op een willekeurige plek een wit blokje. Je hebt 1:30 minuut de tijd om zoveel mogelijk punten te behalen.");
      	 map3.put("genres", "fun, strategie");
      	 map3.put("img", ""+R.drawable.pongo);
      	 glist.add(map3);

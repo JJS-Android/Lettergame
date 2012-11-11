@@ -60,7 +60,7 @@ AdapterView.OnItemClickListener {
 				_activity.startActivity(i);
 				break;
 			case 2:
-				//start pongo
+				//start Pogo
 				i = new Intent(_activity, GamePogo.class);
 				_activity.startActivity(i);
 				break;
