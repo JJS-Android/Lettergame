@@ -2,7 +2,7 @@
 
     <string name="app_name">Minigames</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">Lettergame</string>
+    <string name="title_activity_main">Minigames</string>
     <string name="btn_startgame_text">Start Game</string>
 
     <string name="start">Start</string>
