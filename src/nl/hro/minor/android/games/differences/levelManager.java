@@ -69,35 +69,6 @@ public final class levelManager {
 		
 		URL myFileUrl =null;
 		
-		
-		
-		/*
-        try {
-             myFileUrl= new URL(fileUrl);
-        } catch (MalformedURLException e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-        }
-        try {
-             HttpURLConnection conn= (HttpURLConnection)myFileUrl.openConnection();
-             conn.setDoInput(true);
-             conn.connect();
-             InputStream is = conn.getInputStream();
-             
-             bmp = BitmapFactory.decodeStream(is);
-             
-             ImageView iv = (ImageView) ch.getContext().findViewById(R.id.imageView1);
-     		iv.setImageBitmap(bmp);
-     		
-        } catch (IOException e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-        }
-        */
-		
-		//ImageView iv = (ImageView) ch.getContext().findViewById(R.id.imageView1);
-
-		
 	}
 	
 	private void setPlayedLevel(int playedLevelId){

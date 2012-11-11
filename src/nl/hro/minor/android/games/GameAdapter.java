@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import nl.hro.minor.android.games.differences.Game1;
 import nl.hro.minor.android.games.lettergame.Game;
+import nl.hro.minor.android.games.pogo.GamePogo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -60,8 +61,8 @@ AdapterView.OnItemClickListener {
 				break;
 			case 2:
 				//start pongo
-				//i = new Intent(_activity, Game2.class);
-				//_activity.startActivity(i);
+				i = new Intent(_activity, GamePogo.class);
+				_activity.startActivity(i);
 				break;
 		}
 	}

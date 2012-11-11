@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nl.hro.minor.android.games"
-    android:versionCode="1"
-    android:versionName="1.0" 
+    android:versionCode="3"
+    android:versionName="3.11" 
     android:installLocation="auto" >
 
     <uses-sdk
@@ -26,6 +26,19 @@
             android:screenOrientation="portrait"
             android:name=".lettergame.Game" 
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        </activity>
+        
+        <activity
+            android:name=".pogo.GamePogo"
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" >
+        </activity>
+        
+        <activity android:name=".pogo.ScoreScreen"
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape">
         </activity>
         
         <activity android:name=".differences.Game1" android:label="@string/app_name"> </activity>
